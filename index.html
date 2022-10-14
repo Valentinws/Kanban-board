@@ -14,6 +14,105 @@
     <div class="drag-container">
         <ul class="drag-list">
             <!-- backlog column -->
+            <li class="drag-column backlog-column">
+                <span class="header">
+                    <h1>Backlog</h1>
+                </span>
+                <!-- backlog content -->
+                <div id="backlog-content" class="custom-scroll">
+                    <ul class="drag-item-list" ondragenter="dragEnter(0)" ondrop="drop(event)"
+                        ondragover="allowDrop(event)" id="backlog-list">
+                    </ul>
+                </div>
+                <!-- add button group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span class="">Add Item</span>
+                        <div class="add-btn solid">
+                            <span>Save item</span>
+                        </div>
+                        <div class="add-container">
+                            <div class="add-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!-- Progress column -->
+            <li class="drag-column progress-column">
+                <span class="header">
+                    <h1>Progress</h1>
+                </span>
+                <!-- progress content -->
+                <div id="progress-content" class="custom-scroll">
+                    <ul class="drag-item-list" ondragenter="dragEnter(1)" ondrop="drop(event)"
+                        ondragover="allowDrop(event)" id="progress-list">
+                    </ul>
+                </div>
+                <!-- add button group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span class="">Add Item</span>
+                        <div class="add-btn solid">
+                            <span>Save item</span>
+                        </div>
+                        <div class="add-container">
+                            <div class="add-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!-- Complete column -->
+            <li class="drag-column complete-column">
+                <span class="header">
+                    <h1>Complete</h1>
+                </span>
+                <!-- complete content -->
+                <div id="complete-content" class="custom-scroll">
+                    <ul class="drag-item-list" ondragenter="dragEnter(2)" ondrop="drop(event)"
+                        ondragover="allowDrop(event)" id="complete-list">
+                    </ul>
+                </div>
+                <!-- add button group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span class="">Add Item</span>
+                        <div class="add-btn solid">
+                            <span>Save item</span>
+                        </div>
+                        <div class="add-container">
+                            <div class="add-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!-- On Hold column -->
+            <li class="drag-column on-hold-column">
+                <span class="header">
+                    <h1>On hold</h1>
+                </span>
+                <!-- on-hold content -->
+                <div id="on-hold-content" class="custom-scroll">
+                    <ul class="drag-item-list" ondragenter="dragEnter(3)" ondrop="drop(event)"
+                        ondragover="allowDrop(event)" id="on-hold-list">
+                    </ul>
+                </div>
+                <!-- add button group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span class="">Add Item</span>
+                        <div class="add-btn solid">
+                            <span>Save item</span>
+                        </div>
+                        <div class="add-container">
+                            <div class="add-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
 
         </ul>
     </div>
