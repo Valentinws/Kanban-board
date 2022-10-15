@@ -119,13 +119,13 @@ function updateDOM() {
 // update Item- Delete if necessary, or update Array value
 const updateItem = (id, column) => {
   const itemTextContent = listColumns[column].children[id].textContent;
-  let selectedItem = listArrays[column][id];
+  let selectedItem = listArrays[column];
 
   if (!dragging) {
     if (!itemTextContent) {
-      delete selectedItem;
+      delete selectedItem[id];
     } else {
-      if (itemTextContent !== selectedItem) {
+      if (itemTextContent !== selectedItem[id]) {
         listArrays[column][id] = itemTextContent;
       }
     }
@@ -138,22 +138,12 @@ const updateItem = (id, column) => {
 // Allow arrays to reflect drag and drop items
 function rebuildArrays() {
 
-  backlogListArray = [];
-  for (let i = 0; i < backlogList.children.length; i++) {
-    backlogListArray.push(backlogList.children[i].textContent);
-  }
-  progressListArray = [];
-  for (let i = 0; i < progressList.children.length; i++) {
-    progressListArray.push(progressList.children[i].textContent);
-  }
-  completeListArray = [];
-  for (let i = 0; i < completeList.children.length; i++) {
-    completeListArray.push(completeList.children[i].textContent);
-  }
-  onHoldListArray = [];
-  for (let i = 0; i < onHoldList.children.length; i++) {
-    onHoldListArray.push(onHoldList.children[i].textContent);
-  }
+  backlogListArray = Array.from(backlogList.children).map(i => i.textContent);
+  progressListArray = Array.from(progressList.children).map(i => i.textContent);
+  completeListArray = Array.from(completeList.children).map(i => i.textContent);
+  onHoldListArray = Array.from(onHoldList.children).map(i => i.textContent);
+
+
   updateDOM();
 
 }
