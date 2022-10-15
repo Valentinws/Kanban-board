@@ -54,6 +54,12 @@ function updateSavedColumns() {
   // localStorage.setItem('onHoldItems', JSON.stringify(onHoldListArray));
 }
 
+// Filter Arrays to remove empty items
+const filterArray = (array) => {
+  const filteredArray = array.filter(item => item !== null);
+  return filteredArray;
+}
+
 // Create DOM Elements for each list item
 function createItemEl(columnEl, column, item, index) {
   // console.log('columnEl:', columnEl);
@@ -66,6 +72,9 @@ function createItemEl(columnEl, column, item, index) {
   listEl.textContent = item;
   listEl.draggable = true;
   listEl.setAttribute('ondragstart', 'drag(event)');
+  listEl.contentEditable = true;
+  listEl.id = index;
+  listEl.setAttribute('onfocusout', `updateItem(${index},${column})`);
   // Append
   columnEl.appendChild(listEl);
 
@@ -82,24 +91,38 @@ function updateDOM() {
   backlogListArray.forEach((backlogItem, index) => {
     createItemEl(backlogList, 0, backlogItem, index);
   })
+  backlogListArray = filterArray(backlogListArray);
   // Progress Column
   progressList.textContent = '';
   progressListArray.forEach((progressItem, index) => {
-    createItemEl(progressList, 0, progressItem, index);
+    createItemEl(progressList, 1, progressItem, index);
   })
+  progressListArray = filterArray(progressListArray);
   // Complete Column
   completeList.textContent = '';
   completeListArray.forEach((completeItem, index) => {
-    createItemEl(completeList, 0, completeItem, index);
+    createItemEl(completeList, 2, completeItem, index);
   })
+  completeListArray = filterArray(completeListArray);
   // On Hold Column
   onHoldList.textContent = '';
   onHoldListArray.forEach((onHoldItem, index) => {
-    createItemEl(onHoldList, 0, onHoldItem, index);
+    createItemEl(onHoldList, 3, onHoldItem, index);
   })
+  onHoldListArray = filterArray(onHoldListArray);
   // Run getSavedColumns only once, Update Local Storage
   updateOnLoad = true;
   updateSavedColumns();
+}
+
+// update Item- Delete if necessary, or update Array value
+const updateItem = (id, column) => {
+  if (!listColumns[column].children[id].textContent) {
+    delete listArrays[column][id];
+  }
+
+  console.log(listArrays[column]);
+  updateDOM();
 }
 
 // Allow arrays to reflect drag and drop items
@@ -161,3 +184,29 @@ function drop(e) {
 
 //  on Load
 updateDOM();
+
+// on click add item input box
+
+const showInputBox = (column) => {
+  addBtns[column].style.visibility = 'hidden';
+  saveItemBtns[column].style.display = 'flex';
+  addItemContainers[column].style.display = 'flex';
+
+}
+
+// add to column list, reset textbox
+const saveItemInput = (column) => {
+  listArrays[column].push(addItems[column].textContent);
+  console.log(listArrays[column]);
+  addItems[column].textContent = '';
+  updateDOM();
+}
+
+// when click save item hide theinput box and button
+const hideInputBox = (column) => {
+  saveItemBtns[column].style.display = 'none';
+  addItemContainers[column].style.display = 'none';
+  addBtns[column].style.visibility = '';
+  saveItemInput(column);
+}
+
